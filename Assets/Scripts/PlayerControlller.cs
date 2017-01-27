@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerControlller : MonoBehaviour {
 
-    public float MoveSpeed = 10;
-    public float TurnSpeed = 60;
+    public float moveSpeed = 400f;
+    public float turnSpeed = 90f;
 
-    public float TurnModifier = 1;
-    bool UseTurnModifier = false;
+    public float turnModifier = 1.5f;
+    bool useTurnModifier = false;
 
-    float hMove = 0.0F;
+    float hMove = 0.0f;
     float vMove = 0.0f;
 
 	// Use this for initialization
@@ -21,17 +21,17 @@ public class PlayerControlller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKey(KeyCode.LeftShift))
-            UseTurnModifier = true;
+            useTurnModifier = true;
         else
-            UseTurnModifier = false;
+            useTurnModifier = false;
 
 
-        if (UseTurnModifier)
-            hMove = Input.GetAxis("Horizontal") * (TurnSpeed * TurnModifier) * Time.deltaTime;
+        if (useTurnModifier)
+            hMove = Input.GetAxis("Horizontal") * (turnSpeed * turnModifier) * Time.deltaTime;
         else
-            hMove = Input.GetAxis("Horizontal") * TurnSpeed * Time.deltaTime;
+            hMove = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
 
-        vMove = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
+        vMove = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 	}
 
     void FixedUpdate()
