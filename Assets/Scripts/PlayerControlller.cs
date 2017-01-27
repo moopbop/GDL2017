@@ -9,7 +9,9 @@ public class PlayerControlller : MonoBehaviour {
 
     public float TurnModifier = 1;
     bool UseTurnModifier = false;
-    
+
+    float hMove = 0.0F;
+    float vMove = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -23,20 +25,20 @@ public class PlayerControlller : MonoBehaviour {
         else
             UseTurnModifier = false;
 
-        float hMove = 0.0F;
 
         if (UseTurnModifier)
             hMove = Input.GetAxis("Horizontal") * (TurnSpeed * TurnModifier) * Time.deltaTime;
         else
             hMove = Input.GetAxis("Horizontal") * TurnSpeed * Time.deltaTime;
 
-        float vMove = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
+        vMove = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
+	}
 
-        //transform.Rotate(0, hMove, 0);
-        //transform.Translate(0, 0, vMove);
+    void FixedUpdate()
+    {
         gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, hMove, 0);
         gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, 0, vMove);
-	}
+    }
 
     void OnCollisionEnter(Collision collision)
     {
