@@ -27,16 +27,20 @@ public class PlayerControlller : MonoBehaviour {
 
 
         if (useTurnModifier)
-            hMove = Input.GetAxis("Horizontal") * (turnSpeed * turnModifier) * Time.deltaTime;
+            hMove = Input.GetAxis("turn") * (turnSpeed * turnModifier) * Time.deltaTime;
         else
-            hMove = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
+            hMove = Input.GetAxis("turn") * turnSpeed * Time.deltaTime;
 
-        vMove = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        vMove = Input.GetAxis("hInput") * moveSpeed * Time.deltaTime;
 	}
 
     void FixedUpdate()
     {
-        gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, hMove, 0);
+        if (vMove < 0)
+            gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, -hMove, 0);
+        else
+            gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, hMove, 0);
+      
         gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, 0, vMove);
     }
 
