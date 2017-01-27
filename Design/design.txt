@@ -1,12 +1,42 @@
-planes, trains, and automobiles
-
-this is going to be cyberpunk
-
-train-hopping spy game
-delivering cracked software to a drop spot
-
 waiting by a busy road for the right car to drive by, then stealthily dropping off a package
 	need to avoid police and being around too many witnesses, but crowds can shield you
 	different packages or consistent? (weight, priority, size)
 	
+the normal game flow should be like start at point a, get thing at point b, deliver to point c.
+to implement
+	obstacles (police, rivals)
+	how the player achieves their goal
+		systems to avoid detection
+		standing in crowds
+		slotting mods into keys
+		
+		you're not even a script kiddie, you're the guy who gets the script kiddie's coffee
+		bitch boy/intern
+		working for exposure
+		
+	maybe:
+		cutscenes
+		voice acting
 	
+	start in office behind desk, get told to get something
+	fall down stairs super seriously
+	
+	character is called "bitch-boy"
+	
+	feels like far cry 3 blood dragon
+	
+	start with bitch-boy contest to get coffee
+	2 or 3 other bitch-boys (pac-man ghosts)
+	
+	MVP:
+	only bitch-boy
+	able to drive, grab coffee, and get win game state
+	
+	cannot drive while you have coffee
+	cars lined all around city
+	start all bitch-boys equidistant from coffee in center
+	goal is to get coffee back to your base
+	if you have coffee, you cannot drive
+	civillians are white cubes, bitch-boys are colored cubes
+	turn white when you get coffee
+		encourage player to plow through crowds
