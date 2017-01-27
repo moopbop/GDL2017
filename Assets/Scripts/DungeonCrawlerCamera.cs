@@ -12,10 +12,11 @@ public class DungeonCrawlerCamera : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         offset = transform.position - Target.transform.position;
-	}
+    }
 	
 	void LateUpdate () {
         offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * speed, Vector3.up) * offset;
+        //offset = Quaternion.AngleAxis(-Input.GetAxis("Mouse Y") * speed, Vector3.right) * offset;
         transform.position = Target.transform.position + offset;
         transform.LookAt(Target.transform.position);
         //Vector3 desiredPosition = Target.transform.position + Offset;
