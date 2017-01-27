@@ -2,7 +2,7 @@ waiting by a busy road for the right car to drive by, then stealthily dropping o
 	need to avoid police and being around too many witnesses, but crowds can shield you
 	different packages or consistent? (weight, priority, size)
 	
-the normal game flow should be like start at point a, get thing at point b, deliver to point c.
+the normal game flow should be like start at point a, get thing at point b, deliver to point a.
 to implement
 	obstacles (police, rivals)
 	how the player achieves their goal
@@ -36,7 +36,6 @@ to implement
 	cars lined all around city
 	start all bitch-boys equidistant from coffee in center
 	goal is to get coffee back to your base
-	if you have coffee, you cannot drive
 	civillians are white cubes, bitch-boys are colored cubes
 	turn white when you get coffee
 		encourage player to plow through crowds
