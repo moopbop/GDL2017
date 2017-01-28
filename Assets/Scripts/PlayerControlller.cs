@@ -60,12 +60,22 @@ public class PlayerControlller : MonoBehaviour {
         }
         else if(collision.gameObject.GetComponent<CarController>() != null)
         {
+            
             CarController car = collision.gameObject.GetComponent<CarController>();
             if (car.Pilot != null && this.coffee == true)
             {
-                this.GetComponent<Renderer>().material = colored;
                 this.coffee = false;
-                Instantiate(coffeeObj, new Vector3(Random.Range(-25, 25) + this.transform.position.x, 0, Random.Range(-25, 25) + this.transform.position.z), new Quaternion());
+                this.GetComponent<Renderer>().material = colored;
+
+                Vector3 tempCoffeePosition;
+
+                do
+                {
+                    tempCoffeePosition = new Vector3(Random.Range(-25, 25) + this.transform.position.x, 0, Random.Range(-25, 25) + this.transform.position.z);
+                } while (Physics.OverlapBox(tempCoffeePosition, coffeeObj.transform.position/2).Length != 0);
+                
+
+                Instantiate(coffeeObj, tempCoffeePosition, new Quaternion());
             }
         }
     }
