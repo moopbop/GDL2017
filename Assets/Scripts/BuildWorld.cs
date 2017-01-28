@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BuildWorld : MonoBehaviour {
 
-    public GameObject building, homeBase, street, coffee;
+    public GameObject homeBase, street, coffee;
+    public GameObject[] building = new GameObject[2];
     public Vector2 homeBasePosition;
     public float worldX;
     float streetSize, gridSize;
@@ -15,9 +16,11 @@ public class BuildWorld : MonoBehaviour {
         Vector3 tempVec3 = street.transform.localScale;
 
         float streetX = (street.transform.localScale.x + street.transform.localScale.z) * worldX - street.transform.localScale.z;
+
         street.transform.localScale = new Vector3(streetX, street.transform.localScale.y, street.transform.localScale.z);
+        
         //street.transform.localScale;
-        gridSize = street.transform.localScale.z + building.transform.localScale.x;
+        gridSize = street.transform.localScale.z + building[0].transform.localScale.x;
 
         worldX *= gridSize;
         homeBasePosition *= gridSize;
@@ -35,15 +38,15 @@ public class BuildWorld : MonoBehaviour {
                 else
                 {
                     Vector3 position = new Vector3(x, 3.75f, y);
-                    Instantiate(building, position, new Quaternion(), this.transform);
+                    Instantiate(building[Random.Range(0,2)], position, new Quaternion(), this.transform);
                 }
             }
         }
 
-        for (float x = (building.transform.localScale.x / 2 + street.transform.localScale.z / 2); x < worldX - gridSize; x += gridSize)
+        for (float x = (building[0].transform.localScale.x / 2 + street.transform.localScale.z / 2); x < worldX - gridSize; x += gridSize)
         {
-            Instantiate(street, new Vector3(x, 0, streetX/2 - (building.transform.localScale.x)/2), Quaternion.Euler(0, 90, 0), this.transform);
-            Instantiate(street, new Vector3(streetX/ 2 - (building.transform.localScale.x) / 2, 0, x), Quaternion.Euler(0, 0, 0), this.transform);
+            Instantiate(street, new Vector3(x, 0, streetX/2 - (building[0].transform.localScale.x)/2), Quaternion.Euler(0, 90, 0), this.transform);
+            Instantiate(street, new Vector3(streetX/ 2 - (building[0].transform.localScale.x) / 2, 0, x), Quaternion.Euler(0, 0, 0), this.transform);
         }
 
         //for (float x = (building.transform.localScale.x/2 + streetSize/2); x < worldX; x += gridSize)
@@ -73,5 +76,6 @@ public class BuildWorld : MonoBehaviour {
         Instantiate(coffee, tempCoffeePosition, new Quaternion());
 
         street.transform.localScale = tempVec3;
+
     }
 }
