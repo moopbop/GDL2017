@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildWorld : MonoBehaviour {
 
-    public GameObject building, homeBase, street;
+    public GameObject building, homeBase, street, coffee;
     public Vector2 homeBasePosition;
     public float worldX;
     float streetSize, gridSize;
@@ -29,7 +29,8 @@ public class BuildWorld : MonoBehaviour {
                 if (x == homeBasePosition.x && y == homeBasePosition.y)
                 {
                     Vector3 position = new Vector3(homeBasePosition.x, 10, homeBasePosition.y);
-                    Instantiate(homeBase, position, new Quaternion(), this.transform);
+                    GameObject temp = Instantiate(homeBase, position, new Quaternion(), this.transform);
+                    temp.GetComponent<HomeBase>().myPlayer = GameObject.Find("Player");
                 }
                 else
                 {
@@ -60,6 +61,16 @@ public class BuildWorld : MonoBehaviour {
         //        Instantiate(street, new Vector3(x, 0, y), new Quaternion(), this.transform);
         //    }
         //}
+
+        Vector3 tempCoffeePosition;
+
+        do
+        {
+            tempCoffeePosition = new Vector3(Random.Range(0, worldX-gridSize), .5f, Random.Range(0, worldX-gridSize));
+        } while (Physics.OverlapBox(tempCoffeePosition, coffee.transform.position / 2).Length != 0);
+
+
+        Instantiate(coffee, tempCoffeePosition, new Quaternion());
 
         street.transform.localScale = tempVec3;
     }
