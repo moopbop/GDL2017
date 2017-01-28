@@ -84,9 +84,13 @@ public class CarController : MonoBehaviour {
         else
             gameObject.GetComponent<Rigidbody>().AddTorque(0, hMove, 0);
 
-        Vector3 force = new Vector3(0, 0, vMove);
+        Vector3 force = new Vector3();
         if (useGravity)
-            force.y = -gravity;
+        {
+            force = transform.TransformDirection(Vector3.down) * gravity;
+        }
+
+        force.z = vMove;
 
         gameObject.GetComponent<Rigidbody>().AddRelativeForce(force);
     }
