@@ -34,7 +34,7 @@ public class BuildWorld : MonoBehaviour {
                 else
                 {
                     Vector3 position = new Vector3(x, 3.75f, y);
-                    GameObject temp = Instantiate(building, position, new Quaternion(), this.transform);
+                    Instantiate(building, position, new Quaternion(), this.transform);
                 }
             }
         }
