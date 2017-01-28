@@ -58,7 +58,7 @@ public class PlayerControlller : MonoBehaviour {
             coffee = true;
             this.GetComponent<Renderer>().material = white;
         }
-        else if(collision.gameObject.GetComponent<CarController>() != null)
+        else if (collision.gameObject.GetComponent<CarController>() != null)
         {
             
             CarController car = collision.gameObject.GetComponent<CarController>();
@@ -78,5 +78,11 @@ public class PlayerControlller : MonoBehaviour {
                 Instantiate(coffeeObj, tempCoffeePosition, new Quaternion());
             }
         }
+        else if (collision.gameObject.GetComponent<HomeBase>() != null)
+        {
+            if (collision.gameObject.GetComponent<HomeBase>().myPlayer == this.gameObject && this.coffee == true)
+            Debug.Log("You win!!");
+        }
+
     }
 }
