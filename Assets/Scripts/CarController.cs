@@ -6,6 +6,7 @@ public class CarController : MonoBehaviour {
 
     public float moveSpeed = 100f;
     public float turnSpeed = 40f;
+    public Vector3 centerOfMass;
 
     public float turnModifier = 1.5f;
 
@@ -22,6 +23,7 @@ public class CarController : MonoBehaviour {
 	void Start () {
         initialRotation = gameObject.transform.rotation;
         initialPosition = gameObject.transform.position;
+        GetComponent<Rigidbody>().centerOfMass = centerOfMass;
 	}
 
     void ResetPosition()
