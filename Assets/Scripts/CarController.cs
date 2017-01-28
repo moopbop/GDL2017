@@ -15,11 +15,20 @@ public class CarController : MonoBehaviour {
     bool useTurnModifier = false;
     float hMove = 0.0f;
     float vMove = 0.0f;
+    Quaternion initialRotation;
+    Vector3 initialPosition;
 
 	// Use this for initialization
 	void Start () {
-		
+        initialRotation = gameObject.transform.rotation;
+        initialPosition = gameObject.transform.position;
 	}
+
+    void ResetPosition()
+    {
+        gameObject.transform.position = initialPosition;
+        gameObject.transform.rotation = initialRotation;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,6 +37,8 @@ public class CarController : MonoBehaviour {
         else
             useTurnModifier = false;
 
+        if (Input.GetKeyUp(KeyCode.R))
+            ResetPosition();
 
         if (useTurnModifier)
             hMove = Input.GetAxis("turn") * (turnSpeed * turnModifier) * Time.deltaTime;
@@ -35,14 +46,16 @@ public class CarController : MonoBehaviour {
             hMove = Input.GetAxis("turn") * turnSpeed * Time.deltaTime;
 
         vMove = Input.GetAxis("hInput") * moveSpeed * Time.deltaTime;
+
+
     }
 
     void FixedUpdate()
     {
         if (vMove < 0)
-            gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, -hMove, 0);
+            gameObject.GetComponent<Rigidbody>().AddTorque(0, -hMove, 0);
         else
-            gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, hMove, 0);
+            gameObject.GetComponent<Rigidbody>().AddTorque(0, hMove, 0);
 
         gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, 0, vMove);
     }
