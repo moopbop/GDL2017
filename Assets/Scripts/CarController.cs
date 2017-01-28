@@ -10,6 +10,7 @@ public class CarController : MonoBehaviour {
     public float gravity;
     public float turnModifier = 1.5f;
     public float floatDistance = 5;
+    public float gravityActivateThreshold;
 
     public GameObject Pilot;
 
@@ -33,9 +34,6 @@ public class CarController : MonoBehaviour {
 
         moveSpeed = GetComponent<Rigidbody>().mass * 5000;
         turnSpeed = GetComponent<Rigidbody>().mass * 2500;
-
-        gravityCheckRay.origin = gameObject.transform.position;
-        //gravityCheckRay.direction.
 	}
 
     void ResetPosition()
@@ -46,14 +44,18 @@ public class CarController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        // Capture turn modifier key.
         if (Input.GetKey(KeyCode.LeftShift))
             useTurnModifier = true;
         else
             useTurnModifier = false;
 
+        // Capture reset position key
         if (Input.GetKeyUp(KeyCode.R))
             ResetPosition();
 
+        // Calculate values to use for physics calculation in FixedUpdate
         if (useTurnModifier)
             hMove = Input.GetAxis("turn") * (turnSpeed * turnModifier) * Time.deltaTime;
         else
@@ -61,7 +63,18 @@ public class CarController : MonoBehaviour {
 
         vMove = Input.GetAxis("hInput") * moveSpeed * Time.deltaTime;
 
-        Debug.Log(useGravity);
+        // Check for gravity activation.
+        if (Physics.Raycast(
+            transform.position,                         // Raycast start position
+            transform.TransformDirection(Vector3.down), // Raycast direction
+            gravityActivateThreshold))                  // Raycast length
+        {
+            useGravity = false;
+        }
+        else
+        {
+            useGravity = true;
+        }
     }
 
     void FixedUpdate()
@@ -77,19 +90,4 @@ public class CarController : MonoBehaviour {
 
         gameObject.GetComponent<Rigidbody>().AddRelativeForce(force);
     }
-
-    //void OnCollisionEnter(Collision collision)
-    //{
-    //    useGravity = false;
-    //}
-
-    //void OnCollisionExit(Collision collision)
-    //{
-    //    useGravity = true;
-    //}
-
-    //void OnCollisionStay(Collision collision)
-    //{
-    //    useGravity = false;
-    //}
 }
