@@ -17,6 +17,7 @@ public class PlayerControlller : MonoBehaviour {
 
     public Material white;
     public Material colored;
+    public GameObject coffeeObj;
 
 	// Use this for initialization
 	void Start () {
@@ -57,9 +58,15 @@ public class PlayerControlller : MonoBehaviour {
             coffee = true;
             this.GetComponent<Renderer>().material = white;
         }
-        else if(collision.gameObject.GetComponent("Car Contoller") != null)
+        else if(collision.gameObject.GetComponent<CarController>() != null)
         {
-
+            CarController car = collision.gameObject.GetComponent<CarController>();
+            if (car.Pilot != null && this.coffee == true)
+            {
+                this.GetComponent<Renderer>().material = colored;
+                this.coffee = false;
+                Instantiate(coffeeObj, new Vector3(Random.Range(-25, 25) + this.transform.position.x, 0, Random.Range(-25, 25) + this.transform.position.z), new Quaternion());
+            }
         }
     }
 }
