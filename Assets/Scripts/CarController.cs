@@ -28,6 +28,7 @@ public class CarController : MonoBehaviour {
     float origMoveSpeed;
     float origTurnSpeed;
     float gravityTime;
+    Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
@@ -35,10 +36,11 @@ public class CarController : MonoBehaviour {
         useGravity = true;
         initialRotation = gameObject.transform.rotation;
         initialPosition = gameObject.transform.position;
-        GetComponent<Rigidbody>().centerOfMass = centerOfMass;
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = centerOfMass;
 
-        moveSpeed = GetComponent<Rigidbody>().mass * 5000;
-        turnSpeed = GetComponent<Rigidbody>().mass * 2500;
+        moveSpeed = rb.mass * 5000;
+        turnSpeed = rb.mass * 2500;
 
         origMoveSpeed = moveSpeed;
         origTurnSpeed = turnSpeed;  
@@ -108,19 +110,19 @@ public class CarController : MonoBehaviour {
         //}
 
         if (vMove < 0)
-            gameObject.GetComponent<Rigidbody>().AddTorque(0, -hMove, 0);
+            rb.AddTorque(0, -hMove, 0);
         else
-            gameObject.GetComponent<Rigidbody>().AddTorque(0, hMove, 0);
+            rb.AddTorque(0, hMove, 0);
 
         Vector3 force = new Vector3();
         if (useGravity && gravityTime >= gravityActivateTimeThreshold)
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(0, -gravity, 0);
+            rb.AddForce(0, -gravity, 0);
             //hMove = Mathf.Lerp(hMove, 0, acclNoGravLerp);
         }
 
         force.z = hMove;
 
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, vMove));
+        rb.AddRelativeForce(new Vector3(0, 0, vMove));
     }
 }
