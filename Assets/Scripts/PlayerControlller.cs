@@ -57,5 +57,9 @@ public class PlayerControlller : MonoBehaviour {
             coffee = true;
             this.GetComponent<Renderer>().material = white;
         }
+        else if(collision.gameObject.GetComponent("Car Contoller") != null)
+        {
+
+        }
     }
 }
