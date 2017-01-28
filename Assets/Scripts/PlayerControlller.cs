@@ -13,6 +13,11 @@ public class PlayerControlller : MonoBehaviour {
     float hMove = 0.0f;
     float vMove = 0.0f;
 
+    bool coffee = false;
+
+    public Material white;
+    public Material colored;
+
 	// Use this for initialization
 	void Start () {
 
@@ -46,6 +51,11 @@ public class PlayerControlller : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.GetComponent("Coffee") != null)
+        {
+            Destroy(collision.gameObject);
+            coffee = true;
+            this.GetComponent<Renderer>().material = white;
+        }
     }
 }
