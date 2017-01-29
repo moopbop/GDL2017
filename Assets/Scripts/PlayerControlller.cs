@@ -73,11 +73,11 @@ public class PlayerControlller : MonoBehaviour {
             --delay;
 
         if (vMove < 0)
-            gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, -hMove, 0);
+            gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, -hMove * Time.deltaTime, 0);
         else
-            gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, hMove, 0);
+            gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, hMove * Time.deltaTime, 0);
       
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, 0, vMove);
+        gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, 0, vMove * Time.deltaTime);
     }
 
     void OnCollisionEnter(Collision collision)

@@ -149,19 +149,19 @@ public class CarController : MonoBehaviour {
             return;
 
         if (vMove < 0)
-            rb.AddTorque(0, -hMove, 0);
+            rb.AddTorque(0, -hMove * Time.deltaTime, 0);
         else
-            rb.AddTorque(0, hMove, 0);
+            rb.AddTorque(0, hMove * Time.deltaTime, 0);
 
         Vector3 force = new Vector3();
         if (useGravity && gravityTime >= gravityActivateTimeThreshold)
         {
-            rb.AddForce(0, -gravity, 0);
+            rb.AddForce(0, -gravity * Time.deltaTime, 0);
             //hMove = Mathf.Lerp(hMove, 0, acclNoGravLerp);
         }
 
         force.z = hMove;
 
-        rb.AddRelativeForce(new Vector3(0, 0, vMove));
+        rb.AddRelativeForce(new Vector3(0, 0, vMove * Time.deltaTime));
     }
 }

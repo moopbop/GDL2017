@@ -38,6 +38,8 @@ public class PedestrianController : MonoBehaviour {
 
     bool CheckFloorContact()
     {
+        // Check each corner of pedestrian, and middle
+
         Vector3 nextLocation = transform.position;
         nextLocation.z = nextLocation.z + ((moveSpeed + 0.5f) * Time.deltaTime);
 
