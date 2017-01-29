@@ -85,9 +85,13 @@ public class BuildWorld : MonoBehaviour {
             {
                 tempPedestrianPosition = new Vector3(Random.Range(0, worldX - gridSize), .6f, Random.Range(0, worldX - gridSize));
             } while (Physics.OverlapBox(tempPedestrianPosition, pedestrian.transform.position / 2).Length != 0);
+
+            Instantiate(pedestrian, tempPedestrianPosition, new Quaternion());
         }
 
         street.transform.localScale = tempVec3;
+
+
 
     }
 }
