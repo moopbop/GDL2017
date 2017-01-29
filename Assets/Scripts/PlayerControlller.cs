@@ -6,6 +6,7 @@ public class PlayerControlller : MonoBehaviour {
 
     public float moveSpeed = 400f;
     public float turnSpeed = 90f;
+    public int delay = 0;
 
     public float turnModifier = 1.5f;
     bool useTurnModifier = false;
@@ -32,7 +33,7 @@ public class PlayerControlller : MonoBehaviour {
         else
             useTurnModifier = false;
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && delay <= 0)
         {
             RaycastHit[] temp = Physics.SphereCastAll(this.transform.position, 2f, transform.up);
 
@@ -68,6 +69,9 @@ public class PlayerControlller : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (delay > 0)
+            --delay;
+
         if (vMove < 0)
             gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, -hMove, 0);
         else

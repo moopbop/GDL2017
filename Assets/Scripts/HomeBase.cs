@@ -8,7 +8,12 @@ public class HomeBase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.myPlayer = GameObject.Find("Player");
-		this.GetComponent<Renderer>().material = myPlayer.GetComponent<Renderer>().material;
+        
+    }
+
+    public void getPlayer()
+    {
+        this.myPlayer = GameObject.FindGameObjectWithTag("Player");
+        this.GetComponent<Renderer>().material = myPlayer.GetComponent<Renderer>().material;
     }
 }

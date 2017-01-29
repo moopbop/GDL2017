@@ -68,11 +68,12 @@ public class CarController : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.Space) && this.Pilot != null && delay <= 0)
         {
-            Vector3 playerTempPos = new Vector3(this.transform.position.x + 5f, this.transform.position.y, this.transform.position.z);
+            Vector3 playerTempPos = new Vector3(this.transform.position.x + 1.1f, this.transform.position.y, this.transform.position.z);
             if (!Physics.BoxCast(playerTempPos, new Vector3(1, 1, 1), Vector3.up))
             {
                 this.myCamera.transform.parent = this.Pilot.transform;
                 this.Pilot.GetComponent<PlayerControlller>().myCamera = this.myCamera;
+                this.Pilot.GetComponent<PlayerControlller>().delay = 1;
                 this.myCamera.GetComponent<DungeonCrawlerCamera>().changeTarget(this.Pilot, "Player");
                 this.myCamera = null;
                 this.Pilot.transform.position = playerTempPos;

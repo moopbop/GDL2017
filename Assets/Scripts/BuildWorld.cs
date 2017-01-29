@@ -34,7 +34,7 @@ public class BuildWorld : MonoBehaviour {
                     Vector3 position = new Vector3(homeBasePosition.x, 10, homeBasePosition.y);
                     Instantiate(player, new Vector3(position.x + 8, position.y, position.z), new Quaternion());
                     GameObject temp = Instantiate(homeBase, position, new Quaternion(), this.transform);
-                    temp.GetComponent<HomeBase>().myPlayer = GameObject.Find("Player");
+                    temp.GetComponent<HomeBase>().getPlayer();
                 }
                 else
                 {
