@@ -8,6 +8,7 @@ public class BuildWorld : MonoBehaviour {
     public GameObject[] building = new GameObject[2];
     public Vector2 homeBasePosition;
     public float worldX;
+    public int numPedestrians;
     float streetSize, gridSize;
 
     // Use this for initialization
@@ -75,6 +76,16 @@ public class BuildWorld : MonoBehaviour {
 
 
         Instantiate(coffee, tempCoffeePosition, new Quaternion());
+
+        for (int i = 0; i < numPedestrians; i++)
+        {
+            Vector3 tempPedestrianPosition;
+
+            do
+            {
+                tempPedestrianPosition = new Vector3(Random.Range(0, worldX - gridSize), .6f, Random.Range(0, worldX - gridSize));
+            } while (Physics.OverlapBox(tempPedestrianPosition, pedestrian.transform.position / 2).Length != 0);
+        }
 
         street.transform.localScale = tempVec3;
 
