@@ -81,7 +81,7 @@ public class CarController : MonoBehaviour {
                 this.myCamera.GetComponent<DungeonCrawlerCamera>().changeTarget(this.Pilot, "Player");
                 this.myCamera = null;
                 this.Pilot.transform.position = playerTempPos;
-                this.Pilot.GetComponent<PlayerControlller>().moveSpeed = 400f;
+                this.Pilot.GetComponent<PlayerControlller>().moveSpeed = 400f * 50f;
                 this.Pilot.GetComponent<Rigidbody>().useGravity = true;
                 this.Pilot = null;
             }
