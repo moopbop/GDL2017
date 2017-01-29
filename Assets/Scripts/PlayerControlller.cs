@@ -118,4 +118,21 @@ public class PlayerControlller : MonoBehaviour {
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<BuildWorld>() != null)
+        {
+            Vector3 tempPlayerPosition;
+
+            BuildWorld world = other.GetComponent<BuildWorld>();
+
+            do
+            {
+                tempPlayerPosition = new Vector3(Random.Range(0, world.worldX - world.gridSize), .6f, Random.Range(0, world.worldX - world.gridSize));
+            } while (Physics.OverlapBox(tempPlayerPosition, this.transform.position / 2).Length != 0);
+
+            this.transform.position = tempPlayerPosition;
+        }
+    }
 }

@@ -7,9 +7,9 @@ public class BuildWorld : MonoBehaviour {
     public GameObject homeBase, street, coffee, pedestrian, player;
     public GameObject[] building = new GameObject[2];
     public Vector2 homeBasePosition;
-    public float worldX;
+    public float worldX, gridSize;
     public int numPedestrians;
-    float streetSize, gridSize;
+    float streetSize;
 
     // Use this for initialization
     void Start()
@@ -91,7 +91,10 @@ public class BuildWorld : MonoBehaviour {
 
         street.transform.localScale = tempVec3;
 
-
-
+        GameObject world = GameObject.Find("World");
+        BoxCollider killBox = world.AddComponent<BoxCollider>() as BoxCollider;
+        killBox.center = new Vector3(worldX / 2, 0, worldX / 2);
+        killBox.size = new Vector3(worldX * 1.5f, worldX * 1.5f, worldX * 1.5f);
+        killBox.isTrigger = true;
     }
 }

@@ -160,12 +160,35 @@ public class CarController : MonoBehaviour {
         Vector3 force = new Vector3();
         if (useGravity && gravityTime >= gravityActivateTimeThreshold)
         {
-            rb.AddForce(0, -gravity * Time.deltaTime, 0);
+            rb.AddForce(0, -gravity * Time.deltaTime, 0);s
             //hMove = Mathf.Lerp(hMove, 0, acclNoGravLerp);
         }
 
         force.z = hMove;
 
         rb.AddRelativeForce(new Vector3(0, 0, vMove * Time.deltaTime));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<PedestrianController>() != null)
+        {
+            other.gameObject.transform.LookAt(this.transform);
+            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 40, 40);
+        }
+
+        if (other.GetComponent<BuildWorld>() != null)
+        {
+            Vector3 tempCarPosition;
+
+            BuildWorld world = other.GetComponent<BuildWorld>();
+
+            do
+            {
+                tempCarPosition = new Vector3(Random.Range(0, world.worldX - world.gridSize), .6f, Random.Range(0, world.worldX - world.gridSize));
+            } while (Physics.OverlapBox(tempCarPosition, this.transform.position / 2).Length != 0);
+
+            this.transform.position = tempCarPosition;
+        }
     }
 }
