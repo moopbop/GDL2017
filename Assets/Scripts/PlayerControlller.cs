@@ -23,8 +23,9 @@ public class PlayerControlller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-	}
+        moveSpeed *= 50;
+        turnSpeed *= 50;
+    }
 	
 	// Update is called once per frame
 	void Update () {
