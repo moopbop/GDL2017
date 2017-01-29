@@ -26,6 +26,12 @@ public class BuildWorld : MonoBehaviour {
         worldX *= gridSize;
         homeBasePosition *= gridSize;
 
+
+        BoxCollider killBox = this.gameObject.GetComponent<BoxCollider>();
+        killBox.center = new Vector3(worldX / 2, -50, worldX / 2);
+        killBox.size = new Vector3(worldX * 100f, 1f, worldX * 100f);
+        
+
         for (float x = 0f; x < worldX; x += gridSize)
         {
             for (float y = 0f; y < worldX; y += gridSize)
@@ -91,10 +97,6 @@ public class BuildWorld : MonoBehaviour {
 
         street.transform.localScale = tempVec3;
 
-        GameObject world = GameObject.Find("World");
-        BoxCollider killBox = world.AddComponent<BoxCollider>() as BoxCollider;
-        killBox.center = new Vector3(worldX / 2, 0, worldX / 2);
-        killBox.size = new Vector3(worldX * 1.5f, worldX * 1.5f, worldX * 1.5f);
-        killBox.isTrigger = true;
+       
     }
 }
