@@ -7,7 +7,7 @@ public class PedestrianController : MonoBehaviour {
     public float moveSpeed = 5f;
     public float forwardCheckDistance = 5f;
     public float groundCheckDistance = 5f;
-
+    public GameObject pedestrian;
 	// Use this for initialization
 	void Start () {
 		
@@ -80,10 +80,13 @@ public class PedestrianController : MonoBehaviour {
 
             do
             {
-                tempPedestrianPosition = new Vector3(Random.Range(0, world.worldX - world.gridSize), .6f, Random.Range(0, world.worldX - world.gridSize));
+                tempPedestrianPosition = new Vector3(Random.Range(0, world.worldX - world.gridSize), 1, Random.Range(0, world.worldX - world.gridSize));
             } while (Physics.OverlapBox(tempPedestrianPosition, this.transform.position / 2).Length != 0);
 
-            this.transform.position = tempPedestrianPosition;
+            Instantiate(pedestrian, tempPedestrianPosition, new Quaternion());
+
+            Destroy(this.gameObject);
+
         }
     }
 }

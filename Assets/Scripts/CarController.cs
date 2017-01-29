@@ -171,10 +171,17 @@ public class CarController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<PedestrianController>() != null)
+        if (other.gameObject.GetComponent<PedestrianController>() != null && this.Pilot !=null)
         {
-            other.gameObject.transform.LookAt(this.transform);
-            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 40, 40);
+            if (other.gameObject.GetComponent<Rigidbody>() == null)
+            {
+                Rigidbody body = other.gameObject.AddComponent<Rigidbody>() as Rigidbody;
+                Destroy(body, 10000);
+            }
+            
+            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 40, -40);
+
+           
         }
 
         if (other.GetComponent<BuildWorld>() != null)
@@ -185,7 +192,7 @@ public class CarController : MonoBehaviour {
 
             do
             {
-                tempCarPosition = new Vector3(Random.Range(0, world.worldX - world.gridSize), .6f, Random.Range(0, world.worldX - world.gridSize));
+                tempCarPosition = new Vector3(Random.Range(0, world.worldX - world.gridSize), 20f, Random.Range(0, world.worldX - world.gridSize));
             } while (Physics.OverlapBox(tempCarPosition, this.transform.position / 2).Length != 0);
 
             this.transform.position = tempCarPosition;
