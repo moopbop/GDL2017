@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControlller : MonoBehaviour {
 
@@ -115,7 +116,7 @@ public class PlayerControlller : MonoBehaviour {
         else if (collision.gameObject.GetComponent<HomeBase>() != null)
         {
             if (collision.gameObject.GetComponent<HomeBase>().myPlayer == this.gameObject && this.coffee == true)
-            Debug.Log("You win!!");
+                SceneManager.LoadScene("WinScreen");
         }
 
     }

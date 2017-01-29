@@ -16,6 +16,7 @@ public class BuildWorld : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         startPeds = numPedestrians;
         Vector3 tempVec3 = street.transform.localScale;
 
