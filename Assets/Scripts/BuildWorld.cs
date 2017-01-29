@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildWorld : MonoBehaviour {
 
-    public GameObject homeBase, street, coffee;
+    public GameObject homeBase, street, coffee, pedestrian;
     public GameObject[] building = new GameObject[2];
     public Vector2 homeBasePosition;
     public float worldX;
