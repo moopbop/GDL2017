@@ -134,8 +134,6 @@ public class CarController : MonoBehaviour {
             hMove = Input.GetAxis("turn") * turnSpeed * Time.deltaTime;
 
         vMove = Input.GetAxis("hInput") * moveSpeed * Time.deltaTime;
-
-        Debug.Log(useGravity);
     }
 
     void FixedUpdate()
