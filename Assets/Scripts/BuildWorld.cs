@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildWorld : MonoBehaviour {
 
-    public GameObject homeBase, street, coffee, pedestrian;
+    public GameObject homeBase, street, coffee, pedestrian, player;
     public GameObject[] building = new GameObject[2];
     public Vector2 homeBasePosition;
     public float worldX;
@@ -32,6 +32,7 @@ public class BuildWorld : MonoBehaviour {
                 if (x == homeBasePosition.x && y == homeBasePosition.y)
                 {
                     Vector3 position = new Vector3(homeBasePosition.x, 10, homeBasePosition.y);
+                    Instantiate(player, new Vector3(position.x + 8, position.y, position.z), new Quaternion());
                     GameObject temp = Instantiate(homeBase, position, new Quaternion(), this.transform);
                     temp.GetComponent<HomeBase>().myPlayer = GameObject.Find("Player");
                 }
