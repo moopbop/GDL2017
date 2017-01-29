@@ -18,6 +18,7 @@ public class PlayerControlller : MonoBehaviour {
     public Material white;
     public Material colored;
     public GameObject coffeeObj;
+    public Camera myCamera;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,30 @@ public class PlayerControlller : MonoBehaviour {
             useTurnModifier = true;
         else
             useTurnModifier = false;
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            RaycastHit[] temp = Physics.SphereCastAll(this.transform.position, 2f, transform.up);
+
+            for (int i = 0; i < temp.Length; ++i)
+            {
+                if (temp[i].transform.gameObject.GetComponent<CarController>() != null)
+                {
+                    if (temp[i].transform.gameObject.GetComponent<CarController>().Pilot == null)
+                    {
+                        temp[i].transform.gameObject.GetComponent<CarController>().Pilot = this.gameObject;
+                        temp[i].transform.gameObject.GetComponent<CarController>().myCamera = this.myCamera;
+                        temp[i].transform.gameObject.GetComponent<CarController>().delay = 1;
+                        this.myCamera.transform.parent = temp[i].transform;
+                        this.myCamera.GetComponent<DungeonCrawlerCamera>().changeTarget(temp[i].transform.gameObject, "Car");
+                        this.myCamera = null;
+                        this.transform.position = new Vector3(0, -20, 0);
+                        this.moveSpeed = 0;
+                        this.GetComponent<Rigidbody>().useGravity = false;
+                    }
+                }
+            }
+        }
 
 
         if (useTurnModifier)

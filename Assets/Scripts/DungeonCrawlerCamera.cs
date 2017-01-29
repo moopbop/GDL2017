@@ -31,4 +31,18 @@ public class DungeonCrawlerCamera : MonoBehaviour {
         //}
         
 	}
+
+    public void  changeTarget(GameObject obj, string objType)
+    {
+        this.Target = obj;
+
+        if (objType == "Car")
+        {
+            this.offset = new Vector3(0, 1.9784f, -5f);
+        }
+        else if (objType == "Player")
+        {
+            this.offset = new Vector3(0, 1.28f, -2.23f);
+        }
+    }
 }

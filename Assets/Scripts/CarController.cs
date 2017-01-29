@@ -14,6 +14,8 @@ public class CarController : MonoBehaviour {
     public float acclNoGravLerp;
     public float turnNoGravLerp;
     public GameObject Pilot;
+    public Camera myCamera;
+    public int delay = 0;
     public float gravityActivateTimeThreshold;
 
     float moveSpeed;
@@ -55,11 +57,45 @@ public class CarController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Pilot == null)
+            return;
+
         // Capture turn modifier key.
         if (Input.GetKey(KeyCode.LeftShift))
             useTurnModifier = true;
         else
             useTurnModifier = false;
+
+        if (Input.GetKeyUp(KeyCode.Space) && this.Pilot != null && delay <= 0)
+        {
+            Vector3 playerTempPos = new Vector3(this.transform.position.x + 5f, this.transform.position.y, this.transform.position.z);
+            if (!Physics.BoxCast(playerTempPos, new Vector3(1, 1, 1), Vector3.up))
+            {
+                this.myCamera.transform.parent = this.Pilot.transform;
+                this.Pilot.GetComponent<PlayerControlller>().myCamera = this.myCamera;
+                this.myCamera.GetComponent<DungeonCrawlerCamera>().changeTarget(this.Pilot, "Player");
+                this.myCamera = null;
+                this.Pilot.transform.position = playerTempPos;
+                this.Pilot.GetComponent<PlayerControlller>().moveSpeed = 400f;
+                this.Pilot.GetComponent<Rigidbody>().useGravity = true;
+                this.Pilot = null;
+            }
+            else
+            {
+                playerTempPos = new Vector3(this.transform.position.x - 5f, this.transform.position.y, this.transform.position.z);
+                if (!Physics.BoxCast(playerTempPos, new Vector3(1, 1, 1), Vector3.up))
+                {
+                    this.myCamera.transform.parent = this.Pilot.transform;
+                    this.Pilot.GetComponent<PlayerControlller>().myCamera = this.myCamera;
+                    this.myCamera.GetComponent<DungeonCrawlerCamera>().changeTarget(this.Pilot, "Player");
+                    this.myCamera = null;
+                    this.Pilot.transform.position = playerTempPos;
+                    this.Pilot.GetComponent<PlayerControlller>().moveSpeed = 400f;
+                    this.Pilot.GetComponent<Rigidbody>().useGravity = true;
+                    this.Pilot = null;
+                }
+            }   
+        }
 
         // Capture reset position key
         if (Input.GetKeyUp(KeyCode.R))
@@ -104,10 +140,14 @@ public class CarController : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (this.delay > 0)
+            --this.delay;
         //if (useGravity)
         //{
         //    vMove = Mathf.Lerp(vMove, 0, turnNoGravLerp);
         //}
+        if (Pilot == null)
+            return;
 
         if (vMove < 0)
             rb.AddTorque(0, -hMove, 0);
