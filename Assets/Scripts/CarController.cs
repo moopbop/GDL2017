@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour {
 
-    //public float moveSpeed = 100f;
-    //public float turnSpeed = 40f;
     public Vector3 centerOfMass;
     public float gravity;
     public float turnModifier = 1.5f;
@@ -17,9 +15,9 @@ public class CarController : MonoBehaviour {
     public Camera myCamera;
     public int delay = 0;
     public float gravityActivateTimeThreshold;
+    public float moveSpeed = 5000;
+    public float turnSpeed = 2500;
 
-    float moveSpeed;
-    float turnSpeed;
     bool useTurnModifier;
     float hMove = 0.0f;
     float vMove = 0.0f;
@@ -30,6 +28,7 @@ public class CarController : MonoBehaviour {
     float origMoveSpeed;
     float origTurnSpeed;
     float gravityTime;
+
     Rigidbody rb;
 
 	// Use this for initialization
@@ -41,8 +40,13 @@ public class CarController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass;
 
-        moveSpeed = rb.mass * 5000;
-        turnSpeed = rb.mass * 2500;
+        //moveSpeed = rb.mass * 5000;
+        //turnSpeed = rb.mass * 2500;
+
+        // Saves from typing massive values in editor.
+        moveSpeed *= 10000;
+        turnSpeed *= 10000;
+        gravity *= 100;
 
         origMoveSpeed = moveSpeed;
         origTurnSpeed = turnSpeed;  
