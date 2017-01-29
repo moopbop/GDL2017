@@ -7,6 +7,7 @@ public class PedestrianController : MonoBehaviour {
     public float moveSpeed = 5f;
     public float forwardCheckDistance = 5f;
     public float groundCheckDistance = 5f;
+    public float randomRotMax = 90;
 
 	// Use this for initialization
 	void Start () {
@@ -17,16 +18,27 @@ public class PedestrianController : MonoBehaviour {
 	void Update () {
 
         if (!CheckFloorContact())
-            return;
+        {
+            transform.Rotate(0, 180, 0);
+        }
 
         if (!CheckAheadCollision())
         {
             Vector3 move = new Vector3(0, 0, moveSpeed) * Time.deltaTime;
             transform.Translate(move);
         }
-
-        Debug.Log(CheckFloorContact());
+        else
+        {
+            RotateRandomY();
+        }
 	}
+
+    void RotateRandomY()
+    {
+        float yRot = Random.Range(0, randomRotMax) * Time.deltaTime;
+
+        transform.Rotate(0, yRot, 0);
+    }
 
     bool CheckAheadCollision()
     {
