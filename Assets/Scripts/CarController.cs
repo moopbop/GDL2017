@@ -160,7 +160,7 @@ public class CarController : MonoBehaviour {
         Vector3 force = new Vector3();
         if (useGravity && gravityTime >= gravityActivateTimeThreshold)
         {
-            rb.AddForce(0, -gravity * Time.deltaTime, 0);s
+            rb.AddForce(0, -gravity * Time.deltaTime, 0);
             //hMove = Mathf.Lerp(hMove, 0, acclNoGravLerp);
         }
 

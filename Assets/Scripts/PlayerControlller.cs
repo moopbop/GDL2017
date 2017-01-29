@@ -99,6 +99,7 @@ public class PlayerControlller : MonoBehaviour {
             {
                 this.coffee = false;
                 this.GetComponent<Renderer>().material = colored;
+                gameObject.GetComponent<MusicController>().ToLowTime();
 
                 Vector3 tempCoffeePosition;
 
