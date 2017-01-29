@@ -88,6 +88,8 @@ public class PlayerControlller : MonoBehaviour {
             Destroy(collision.gameObject);
             coffee = true;
             this.GetComponent<Renderer>().material = white;
+
+            // Start buildup + climax in music controller
         }
         else if (collision.gameObject.GetComponent<CarController>() != null)
         {

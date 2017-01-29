@@ -17,12 +17,16 @@ public class PedestrianController : MonoBehaviour {
 	void Update () {
 
         if (!CheckFloorContact())
-            RotateRandomY();
+            TurnAround();
 
         if (!CheckAheadCollision())
         {
             Vector3 move = new Vector3(0, 0, moveSpeed) * Time.deltaTime;
             transform.Translate(move);
+        }
+        else
+        {
+            RotateRandomY();
         }
 	}
 
@@ -32,6 +36,12 @@ public class PedestrianController : MonoBehaviour {
             transform.position,
             transform.TransformDirection(Vector3.forward),
             forwardCheckDistance);
+    }
+
+    void TurnAround()
+    {
+        float turn = Random.Range(120, 190);
+        transform.Rotate(0, turn, 0);
     }
 
     void RotateRandomY()
