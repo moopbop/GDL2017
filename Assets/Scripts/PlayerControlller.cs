@@ -51,6 +51,7 @@ public class PlayerControlller : MonoBehaviour {
                         this.transform.position = new Vector3(0, -20, 0);
                         this.moveSpeed = 0;
                         this.GetComponent<Rigidbody>().useGravity = false;
+                        break;
                     }
                 }
             }
