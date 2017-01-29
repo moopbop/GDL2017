@@ -69,7 +69,7 @@ public class BuildWorld : MonoBehaviour {
 
         do
         {
-            tempCoffeePosition = new Vector3(Random.Range(0, worldX-gridSize), .5f, Random.Range(0, worldX-gridSize));
+            tempCoffeePosition = new Vector3(Random.Range(0, worldX-gridSize), .6f, Random.Range(0, worldX-gridSize));
         } while (Physics.OverlapBox(tempCoffeePosition, coffee.transform.position / 2).Length != 0);
 
 
