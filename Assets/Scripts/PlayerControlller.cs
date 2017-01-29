@@ -51,7 +51,7 @@ public class PlayerControlller : MonoBehaviour {
                         this.myCamera.GetComponent<DungeonCrawlerCamera>().changeTarget(temp[i].transform.gameObject, "Car");
                         this.myCamera = null;
                         this.transform.position = new Vector3(0, -20, 0);
-                        this.moveSpeed = 0;
+                        //this.moveSpeed = 0;
                         this.GetComponent<Rigidbody>().useGravity = false;
                         break;
                     }

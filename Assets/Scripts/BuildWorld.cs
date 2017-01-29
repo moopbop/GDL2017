@@ -9,11 +9,14 @@ public class BuildWorld : MonoBehaviour {
     public Vector2 homeBasePosition;
     public float worldX, gridSize;
     public int numPedestrians;
+    int startPeds;
     float streetSize;
+    public int killed = 0;
 
     // Use this for initialization
     void Start()
     {
+        startPeds = numPedestrians;
         Vector3 tempVec3 = street.transform.localScale;
 
         float streetX = (street.transform.localScale.x + street.transform.localScale.z) * worldX - street.transform.localScale.z;
@@ -98,5 +101,22 @@ public class BuildWorld : MonoBehaviour {
         street.transform.localScale = tempVec3;
 
        
+    }
+
+    private void Update()
+    {
+            while (numPedestrians < startPeds)
+            {
+                Vector3 tempPedestrianPosition;
+
+                do
+                {
+                    tempPedestrianPosition = new Vector3(Random.Range(0, worldX - gridSize), .6f, Random.Range(0, worldX - gridSize));
+                } while (Physics.OverlapBox(tempPedestrianPosition, pedestrian.transform.position / 2).Length != 0);
+
+                Instantiate(pedestrian, tempPedestrianPosition, new Quaternion());
+
+                numPedestrians += 1;
+            }
     }
 }

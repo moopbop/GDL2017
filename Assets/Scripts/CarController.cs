@@ -64,6 +64,7 @@ public class CarController : MonoBehaviour {
         if (Pilot == null)
             return;
 
+        this.Pilot.transform.position = new Vector3(0, -20, 0);
         // Capture turn modifier key.
         if (Input.GetKey(KeyCode.LeftShift))
             useTurnModifier = true;
@@ -81,7 +82,7 @@ public class CarController : MonoBehaviour {
                 this.myCamera.GetComponent<DungeonCrawlerCamera>().changeTarget(this.Pilot, "Player");
                 this.myCamera = null;
                 this.Pilot.transform.position = playerTempPos;
-                this.Pilot.GetComponent<PlayerControlller>().moveSpeed = 400f * 50f;
+                //this.Pilot.GetComponent<PlayerControlller>().moveSpeed = 400f;
                 this.Pilot.GetComponent<Rigidbody>().useGravity = true;
                 this.Pilot = null;
             }
@@ -95,7 +96,7 @@ public class CarController : MonoBehaviour {
                     this.myCamera.GetComponent<DungeonCrawlerCamera>().changeTarget(this.Pilot, "Player");
                     this.myCamera = null;
                     this.Pilot.transform.position = playerTempPos;
-                    this.Pilot.GetComponent<PlayerControlller>().moveSpeed = 400f;
+                    //this.Pilot.GetComponent<PlayerControlller>().moveSpeed = 400f;
                     this.Pilot.GetComponent<Rigidbody>().useGravity = true;
                     this.Pilot = null;
                 }
@@ -178,8 +179,18 @@ public class CarController : MonoBehaviour {
                 Rigidbody body = other.gameObject.AddComponent<Rigidbody>() as Rigidbody;
                 Destroy(body, 10000);
             }
-            
-            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 40, -40);
+
+            BoxCollider[] colliders = other.gameObject.GetComponents<BoxCollider>();
+
+            for (int i = 0; i < colliders.Length; ++i)
+            {
+                colliders[i].isTrigger = true;
+            }
+
+            other.gameObject.transform.LookAt(this.transform.position);
+            Vector3 explosionPosition = this.transform.position;
+            explosionPosition.y -= 3;
+            other.gameObject.GetComponent<Rigidbody>().AddExplosionForce(2000f, explosionPosition, 20);
 
            
         }

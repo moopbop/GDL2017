@@ -8,13 +8,24 @@ public class PedestrianController : MonoBehaviour {
     public float forwardCheckDistance = 5f;
     public float groundCheckDistance = 5f;
     public GameObject pedestrian;
+    GameObject worldObj;
+    BuildWorld world;
 	// Use this for initialization
 	void Start () {
-		
+        worldObj = GameObject.Find("World");
+        world = worldObj.GetComponent<BuildWorld>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+
+        if (this.transform.position.x > world.worldX - (world.gridSize * .75f) || this.transform.position.z > world.worldX - (world.gridSize * .75f) || this.transform.position.x < -6.5 || this.transform.position.z < -6.5)
+        {
+            world.numPedestrians -= 1;
+
+            Destroy(this.gameObject);
+        }
 
         if (!CheckFloorContact())
             TurnAround();
@@ -73,18 +84,10 @@ public class PedestrianController : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<BuildWorld>() != null)
-        {
-            Vector3 tempPedestrianPosition;
+        { 
 
-            BuildWorld world = other.GetComponent<BuildWorld>();
-
-            do
-            {
-                tempPedestrianPosition = new Vector3(Random.Range(0, world.worldX - world.gridSize), 1, Random.Range(0, world.worldX - world.gridSize));
-            } while (Physics.OverlapBox(tempPedestrianPosition, this.transform.position / 2).Length != 0);
-
-            Instantiate(pedestrian, tempPedestrianPosition, new Quaternion());
-
+            world.numPedestrians -= 1;
+            world.killed += 1;
             Destroy(this.gameObject);
 
         }
